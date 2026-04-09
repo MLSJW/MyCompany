@@ -7,7 +7,7 @@ namespace MyCompany
         public static async Task Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            WebApplication app = builder.Build();
+            
             //подключение json и дефолтных путей
             IConfigurationBuilder configBuild = new ConfigurationBuilder()
                 .SetBasePath(builder.Environment.ContentRootPath)
@@ -16,9 +16,25 @@ namespace MyCompany
 
             IConfiguration configuration = configBuild.Build();
             AppConfig config = configuration.GetSection("Project").Get < AppConfig > ()!;
-            app.MapGet("/", () => "Hello World!");
+            
 
-            app.Run();
+            //Контроллеры
+            builder.Services.AddControllersWithViews();
+
+
+            //Сборка конфига
+            WebApplication app = builder.Build();
+            //app.MapGet("/", () => "Hello World!");
+            //Подключение статичных файлов из wwwroot
+            app.UseStaticFiles();
+
+            //Маршрутизация
+            app.UseRouting();
+
+            //Регистрация маршрутов
+            app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+            await app.RunAsync();
         }
     }
 }
