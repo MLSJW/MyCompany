@@ -10,5 +10,6 @@ namespace MyCompany.Domain.Entities
         [MaxLength(200)]
         public string? Title { get; set; }
         public DateTime DateTime { get; set; } = DateTime.UtcNow;
+
     }
 }
