@@ -13,12 +13,8 @@
 					<a asp-area="" asp-controller="" asp-action="Index" id="logo">
 					@appConfig?.Company.CompanyName
 				</a>
-					<a asp-area="" asp-controller="Services" asp-action="Index" class="button icon solid fa-info-circle">
-						К услугам
-					</a>
 				</h1>
-				@* TODO: ViewComponent *@
-
+				@(await Component.InvokeAsync<MenuViewComponent>())
 			</div>
 		</header>
 
