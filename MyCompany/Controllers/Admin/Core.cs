@@ -10,10 +10,12 @@ namespace MyCompany.Controllers.Admin
     {
         private readonly DataManager _dataManager;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public AdminController(DataManager dataManager, IWebHostEnvironment hostEnvironment)
+        private readonly ILogger<AdminController> _logger;
+        public AdminController(DataManager dataManager, IWebHostEnvironment hostEnvironment, ILogger<AdminController> logger)
         {
             _dataManager = dataManager;
             _hostingEnvironment = hostEnvironment;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {

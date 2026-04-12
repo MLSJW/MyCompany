@@ -5,6 +5,7 @@ using MyCompany.Domain;
 using MyCompany.Domain.Repositories.Abstract;
 using MyCompany.Domain.Repositories.EntityFramework;
 using MyCompany.Infrastructure;
+using Serilog;
 
 namespace MyCompany
 {
@@ -53,11 +54,17 @@ namespace MyCompany
 
             //Контроллеры
             builder.Services.AddControllersWithViews();
-
+            builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
             //Сборка конфига
             WebApplication app = builder.Build();
             //app.MapGet("/", () => "Hello World!");
+            app.UseSerilogRequestLogging();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             //Подключение статичных файлов из wwwroot
             app.UseStaticFiles();
 
