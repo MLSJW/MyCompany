@@ -1,0 +1,89 @@
+﻿@model Service
+@{
+    string strTitle = "Редактировать запись";
+    ViewBag.Title = strTitle;
+}
+<style>
+    button{
+        color: black !important;
+    }
+</style>
+<script src="https://cdn.tiny.cloud/1/bg6jwa3uu4d6u16ogubhmtaxfmvxlc6focqvzicffq2772bp/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <form asp-area="" asp-controller="Admin" asp-action="ServicesEdit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="DateTime" />
+            <input type="hidden" asp-for="Photo" />
+
+            <div asp-validation-summary="All"></div>
+            <div class="div-box">
+                <select asp-for="ServiceCategoryId">
+                    <option value="">...выберите из списка</option>
+                    @foreach (ServiceCategory entity in ViewBag.ServiceCategories)
+                    {
+                                <option value="@entity.Id">@entity.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="ServiceCategoryId"></span>
+            </div>
+            <div class ="div-box">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Type"></label>
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<ServiceTypeEnum>()"></select>
+                <span asp-validation-for="Type"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="DescriptionShort"></label>
+                <input asp-for="DescriptionShort" />
+                <span asp-validation-for="DescriptionShort"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Photo"></label>
+                <input type="file" name="titleImageFile" id="titleImageFile"/>
+                <div>
+                    <img class="img-block" src="~/img/@Model.Photo" />
+                </div>
+            </div>
+            <input type="submit" value="Сохранить" />
+        </form>
+    </div>
+</div>
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      language: 'ru',
+      plugins: [
+        'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+        'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'tinymceai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf',  'image'
+      ],
+      toolbar: 'undo redo | tinymceai-chat tinymceai-quickactions tinymceai-review | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat |  image',
+      automatic_uploads: true,
+      images_upload_url: '/admin/SaveEditorImg',
+      images_reuse_filename: true,
+      image_dimensions: false,
+      paste_data_images: true,
+      convert_urls: false,
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      tinymceai_token_provider: async () => {
+        await fetch(`https://demo.api.tiny.cloud/1/bg6jwa3uu4d6u16ogubhmtaxfmvxlc6focqvzicffq2772bp/auth/random`, { method: "POST", credentials: "include" });
+        return { token: await fetch(`https://demo.api.tiny.cloud/1/bg6jwa3uu4d6u16ogubhmtaxfmvxlc6focqvzicffq2772bp/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
+      },
+      
+    });
+</script>
