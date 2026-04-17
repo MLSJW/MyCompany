@@ -1,16 +1,65 @@
-﻿@await Html.PartialAsync("_SidebarPartial")
-<div class="col-8 col-12-medium imp-medium">
-	<div id="content">
+﻿@model IEnumerable<ServiceDTO>
+@{
+    string strTitle = "Услуги";
+    ViewBag.Title = strTitle;
+}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Экскурсии в Египте</h1>
+        <p class="hero-subtitle">Выберите курорт вашего отеля</p>
+        <a asp-area="" asp-controller="Services" class="hero-button">
+            К экскурсиям →
+        </a>
+    </div>
+</div>
 
-		<article>
-			<header class="major">
-				<h2>Добро пожаловать на сайт компании "UNKNOWN"</h2>
-				<p>
-					Экскурсии
-				</p>
-			</header>
-			<span class = "image feautered"> <img src="~/img/bg04.png" alt="welcome"/>	</span>
-			</article>
+<!-- ОСНОВНОЙ КОНТЕНТ (просто обернул в див с отступами) -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+    <div id="content">
+        <article>
+            <header class="major" style="text-align: center; margin-bottom: 2rem;">
+                <h2>Добро пожаловать на сайт компании "UNKNOWN"</h2>
+                <p>Экскурсии</p>
+            </header>
+            <span class="image featured">
+                <img src="~/img/bg04.png" alt="welcome" style="width: 100%; border-radius: 20px;" />
+            </span>
+        </article>
 
-	</div>
+        @if (Model != null && Model.Any())
+        {
+            <section class="services-preview">
+                <header class="major" style="text-align: center; margin: 3rem 0 2rem;">
+                    <h2>Популярные экскурсии</h2>
+                    <p>Выбрать приключение</p>
+                </header>
+                <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                    @foreach (ServiceDTO entity in Model)
+                    {
+                        <article class="box excerpt" style="background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; padding: 1rem; gap: 1rem;">
+                            <a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" class="image left image-service-list" style="width: 100px; height: 100px; flex-shrink: 0;">
+                                <img src="~/img/@entity.PhotoFileName" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" />
+                            </a>
+                            <div>
+                                <header>
+                                    <h3>
+                                        <a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" style="text-decoration: none; color: #333;">
+                                            @entity.Title
+                                        </a>
+                                    </h3>
+                                </header>
+                                @if (entity.CategoryName != null)
+                                {
+                                    <div>
+                                        Категория: <span class="text-bold" style="font-weight: bold; color: #ff6b6b;">@entity.CategoryName</span>
+                                    </div>
+                                }
+                                <p>@entity.DescriptionShort</p>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </section>
+        }
+    </div>
 </div>

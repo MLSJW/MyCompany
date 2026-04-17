@@ -2,11 +2,33 @@
 @{
 	AppConfig? appConfig = config.GetSection("Project").Get<AppConfig>();
 }
+@* <style>
+	contacts
+	{
+		display: flex;
+		width: 30px;
+		flex-direction: row;
+		justify-content: left;
+	}
+</style> *@
 <!-- Footer Wrapper -->
 <div id="footer-wrapper">
 	<footer id="footer" class="container">
 		<div class="row">
 			<div class="col-12">
+				<div id="contacts">
+				<a href="#" class="contacts">
+					<div class="social-icon">
+						<img src="~/img/whatsapp (2)-no-bg-preview (carve.photos).png" />
+					</div>
+					
+				</a>
+				<a href="#" class="contacts">
+					<div class="social-iconTG">
+						<img src="~/img/Telegram.png" />
+					</div>
+				</a>
+					</div>
 				<div id="copyright">
 					<ul class="menu">
 						<li>&copy; @appConfig?.Company.CompanyName All rights reserved</li>

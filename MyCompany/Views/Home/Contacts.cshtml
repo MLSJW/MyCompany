@@ -4,19 +4,102 @@
     string strTitle = "Контакты";
     ViewBag.Title = strTitle;
 }
-@await Html.PartialAsync("_SidebarPartial")
-<div class="col-8 col-12-medium imp-medium">
-    <div id="content">
-        <article>
-            <header class="major">
-                <h2>@strTitle</h2>
-            </header>
-            <div>
-                Телефон: <span class="text-bold"><a href="tel:@appConfig?.Company.CompanyPhoneShort">@appConfig?.Company.CompanyPhone</a></span>
-            </div>
-            <div>
-                Email: <span class="text-bold"><a href="mailto:@appConfig?.Company.CompanyEmail">@appConfig?.Company.CompanyEmail</a></span>
-            </div>
-        </article>
+
+
+<div class="contacts-page">
+
+    <!-- Заголовок -->
+    <div class="contacts-header">
+        <h1> @strTitle</h1>
+        <p>Свяжитесь с нами — мы всегда на связи!</p>
     </div>
+
+    <!-- Основная сетка -->
+    <div class="contacts-grid">
+
+        <!-- Левая колонка: контакты -->
+        <div class="contact-card">
+            <h3>
+                <i></i> Контактная информация
+            </h3>
+            <ul class="contact-list">
+                <li>
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Телефон</div>
+                        <div class="contact-value">
+                            <a href="tel:@appConfig?.Company.CompanyPhoneShort">
+                                @appConfig?.Company.CompanyPhone
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">
+                            <a href="mailto:@appConfig?.Company.CompanyEmail">
+                                @appConfig?.Company.CompanyEmail
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Режим работы</div>
+                        <div class="contact-value">Ежедневно с 9:00 до 21:00</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Адрес</div>
+                        <div class="contact-value">г. Хургада, ул. Шертон, д. 25</div>
+                    </div>
+                </li>
+            </ul>
+            <div class="work-hours">
+                 Работаем без выходных
+            </div>
+        </div>
+
+        <!-- Правая колонка: соцсети -->
+        <div class="contact-card">
+            <h3>
+                <i></i> Мы в соцсетях
+            </h3>
+            <div class="social-grid">
+                <a href="#" class="social-item">
+                    <div class="social-icon">💬</div>
+                    <span class="social-name">WhatsApp</span>
+                </a>
+                <a href="#" class="social-item">
+                    <div class="social-icon">📱</div>
+                    <span class="social-name">Telegram</span>
+                </a>
+                <a href="#" class="social-item">
+                    <div class="social-icon">📷</div>
+                    <span class="social-name">Instagram</span>
+                </a>
+                <a href="#" class="social-item">
+                    <div class="social-icon">🌐</div>
+                    <span class="social-name">VK</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок с картой -->
+    <div class="map-card">
+        <h3> Как нас найти</h3>
+        <div class="map-placeholder">
+            <p> Мы находимся в центре Хургады</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                МЕСТО ПОД ЯНДЕКС КАРТУ
+            </p>
+        </div>
+    </div>
+
 </div>

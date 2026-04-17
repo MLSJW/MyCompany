@@ -4,8 +4,7 @@
 
 }
 <div id="header-wrapper">
-	<div class="container">
-
+	
 		<header id="header">
 			<div class="inner">
 
@@ -13,10 +12,23 @@
 					<a asp-area="" asp-controller="" asp-action="Index" id="logo">
 					@appConfig?.Company.CompanyName
 				</a>
+				
 				</h1>
+			<div class="header-contacts">
+				<a href="tel:@appConfig?.Company.CompanyPhoneShort" class="phone-number">
+					📞 @appConfig?.Company.CompanyPhone
+				</a>
+				<a href="#" class="Hsocial-icon">
+					<img src="~/img/whatsapp (2)-no-bg-preview (carve.photos).png" alt="WhatsApp" />
+				</a>
+				<a href="#" class="Hsocial-icon">
+						<img src="~/img/Telegram.png" />
+				</a>
+			</div>
+			
 				@(await Component.InvokeAsync<MenuViewComponent>())
 			</div>
 		</header>
 
-	</div>
+	
 </div>
