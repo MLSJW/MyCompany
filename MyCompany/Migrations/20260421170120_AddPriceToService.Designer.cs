@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyCompany.Domain;
 
@@ -11,9 +12,11 @@ using MyCompany.Domain;
 namespace MyCompany.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260421170120_AddPriceToService")]
+    partial class AddPriceToService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace MyCompany.Migrations
                         new
                         {
                             Id = "CD37CD19-2F81-4737-A1D3-95A95869A21B",
-                            ConcurrencyStamp = "dc3dd3b6-c5db-4e75-83b7-e5b7f4969dbe",
+                            ConcurrencyStamp = "aac23195-d02a-4d12-a622-db53139468a9",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -152,13 +155,13 @@ namespace MyCompany.Migrations
                         {
                             Id = "ACCFA7D5-998D-42DE-ABB2-F94979E32468",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85c09511-e2fd-4f47-a445-2df4b8264286",
+                            ConcurrencyStamp = "24b834d9-032b-4e65-a5e3-4f8f8fcc4906",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHKxw64xpYmuB7Ago3OfkODTJlRlJV7jhexqb8dqKE0J+3H7d9cUkaFsKd7Qy9eeCg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP7f1NR9aiBBG1FM6/ksPdZoFG/GjwgWbTuH1mHIjQXVvYADc8Bdoya1fsiPXlxdIw==",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -281,9 +284,6 @@ namespace MyCompany.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ServiceCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Time")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")

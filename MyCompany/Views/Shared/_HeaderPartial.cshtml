@@ -1,34 +1,35 @@
-﻿@inject IConfiguration config
-@{
-	AppConfig? appConfig = config.GetSection("Project").Get<AppConfig>();
+﻿	@inject IConfiguration config
+	@{
+		AppConfig? appConfig = config.GetSection("Project").Get<AppConfig>();
 
-}
-<div id="header-wrapper">
+	}
+	<div id="header-wrapper">
 	
-		<header id="header">
-			<div class="inner">
-
-				<h1>
-					<a asp-area="" asp-controller="" asp-action="Index" id="logo">
-					@appConfig?.Company.CompanyName
-				</a>
-				
-				</h1>
-			<div class="header-contacts">
-				<a href="tel:@appConfig?.Company.CompanyPhoneShort" class="phone-number">
-					📞 @appConfig?.Company.CompanyPhone
-				</a>
-				<a href="#" class="Hsocial-icon">
-					<img src="~/img/whatsapp (2)-no-bg-preview (carve.photos).png" alt="WhatsApp" />
-				</a>
-				<a href="#" class="Hsocial-icon">
-						<img src="~/img/Telegram.png" />
-				</a>
-			</div>
+			<header id="header">
+				<div class="inner">
 			
-				@(await Component.InvokeAsync<MenuViewComponent>())
-			</div>
-		</header>
+						<a asp-area="" asp-controller="" asp-action="Index" id="logo">
+							<img src="/img/лого2.png" />
+						@* @appConfig?.Company.CompanyName *@
+					</a>
+				
+				
+				<div class="header-contacts">
+					<a href="tel:@appConfig?.Company.CompanyPhoneShort" class="phone-number">
+					<img id="tel" src="~/img/free-icon-telephone-3884261.png" alt="Alternate Text" /> @appConfig?.Company.CompanyPhone
+					</a>
+
+					<a href="#" class="Hsocial-icon">
+						<img src="~/img/whatsapp (2)-no-bg-preview (carve.photos).png" alt="WhatsApp" />
+					</a>
+					<a href="#" class="Hsocial-icon">
+							<img src="~/img/Telegram.png" />
+					</a>
+				</div>
+			
+					@(await Component.InvokeAsync<MenuViewComponent>())
+				</div>
+			</header>
 
 	
-</div>
+	</div>

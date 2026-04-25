@@ -23,6 +23,11 @@ namespace MyCompany.Domain.Entities
 
         [Display(Name = "Тип услуги")]
         public ServiceTypeEnum Type { get; set; }
+        [Display(Name = "Цена")]
+        public int Price { get; set; }
+        [Display(Name = "Время поездки")]
+        public int Time { get; set; }
+
 
     }
 }

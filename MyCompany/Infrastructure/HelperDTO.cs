@@ -16,6 +16,8 @@ namespace MyCompany.Infrastructure
             entityDTO.Description = entity.Description; 
             entityDTO.PhotoFileName = entity.Photo;
             entityDTO.Type = entity.Type.ToString();
+            entityDTO.Price = entity.Price;
+            entityDTO.Time = entity.Time;
             return entityDTO;
         }
         public static IEnumerable<ServiceDTO> TransformServices(IEnumerable<Service> entities)

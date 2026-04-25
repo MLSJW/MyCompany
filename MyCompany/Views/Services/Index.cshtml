@@ -1,44 +1,84 @@
 ﻿@model IEnumerable<ServiceDTO>
 @{
-    string strTitle = "Услуги";
+    string strTitle = "Экскурсии в Египте";
     ViewBag.Title = strTitle;
 }
-@* @await Html.PartialAsync("_SideBarPartial") *@
-<div class="col-8 col-12-medium imp-medium">
-    <div id="content">
-        @if (Model.Any())
-        {
-            <section class="box article-list">
-                <h2 class="icon fa-file-alt">
-                    @strTitle
-                </h2>
-                    @foreach (ServiceDTO entity in Model)
-                    {
-                        <article class="box excerpt">
-                            <a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" class="image left image-service-list">
-                                <img src="~/img/@entity.PhotoFileName" alt="" />
-                            </a>
-                            <div>
-                                <header>
-                                    <h3>
-                                        <a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id">
-                                           @entity.Title
-                                        </a>
-                                    </h3>
-                                </header>
-                                @if (entity.CategoryName != null)
-                                {
-                                    <div>
-                                        Категория: <span class="text-bold">@entity.CategoryName</span>
-                                    </div>
-                                }
-                                <p>
-                                    @entity.DescriptionShort
-                                </p>
-                            </div>
-                        </article>
-                    }
-            </section>
-        }
+
+
+<div class="services-hero">
+    <div class="services-hero-content">
+        <h1>Экскурсии в Египте</h1>
+        <p>Выберите идеальное путешествие из 50+ уникальных маршрутов</p>
     </div>
 </div>
+
+
+<div class="services-filters">
+    <div class="filters-container">
+        <button class="filter-btn active" data-category="all">Все экскурсии</button>
+        <button class="filter-btn" data-category="sea">Морские</button>
+        <button class="filter-btn" data-category="desert">Пустынные</button>
+        <button class="filter-btn" data-category="history">Исторические</button>
+        <button class="filter-btn" data-category="transfer">Трансферы</button>
+    </div>
+</div>
+
+
+<section class="services-section">
+    <div class="services-grid-full">
+        @foreach (ServiceDTO entity in Model)
+        {
+            <div class="service-card-modern" data-category="@entity.CategoryName?.ToLower()">
+                <div class="card-image-wrapper">
+                    <img src="~/img/@entity.PhotoFileName" alt="@entity.Title" />
+                    <div class="card-badge">@entity.CategoryName</div>
+                    <div class="card-price-badge">от €@entity.Price</div>
+                </div>
+                <div class="card-body">
+                    <h3>@entity.Title</h3>
+                    <p>@entity.DescriptionShort</p>
+                    <div class="card-features">
+                        <span>🕐 6-8 часов</span>
+                        <span>🚐 Трансфер</span>
+                        <span>🍽 Обед</span>
+                    </div>
+                    <a asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" class="card-btn">
+                        Подробнее →
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script>
+    // Фильтрация по категориям
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.service-card-modern');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+<script>
+    // Делаем хедер непрозрачным на странице услуг
+    document.addEventListener('DOMContentLoaded', function() {
+        var header = document.getElementById('header-wrapper');
+        if (header) {
+            header.classList.add('scrolled');
+        }
+    });
+</script>
