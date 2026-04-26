@@ -7,7 +7,7 @@ build:
   image: null
 run:
   image: null
-  buildFileName: bin/MyCompany.dll 
+  buildFileName: bin/MyCompany 
   persistenceMount: /data
   containerPort: "80"
   servicePort: "80"
