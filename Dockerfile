@@ -11,5 +11,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 
 COPY --from=build /app/publish .
-
+COPY appsettings.json ./
 ENTRYPOINT ["dotnet", "MyCompany.dll"]
