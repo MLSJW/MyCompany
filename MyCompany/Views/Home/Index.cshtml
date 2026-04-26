@@ -75,7 +75,7 @@
                 <img src="~/img/bg04.png" alt="welcome" style="width: 100%; border-radius: 20px;" />
             </span>
         </article> *@
-
+<div class="section-divider"></div>
 <section class="popular-section">
     <div class="section-header">
         <h2>Популярные экскурсии</h2>
@@ -86,21 +86,62 @@
         @foreach (ServiceDTO entity in Model.Take(6))
         {
             <div class="popular-card">
-                <div class="card-image">
-                    <img src="~/img/@entity.PhotoFileName" alt="@entity.Title" />
-                </div>
-                <div class="card-content">
-                    <h3>@entity.Title</h3>
-                    <p>@entity.DescriptionShort</p>
-                    <div class="card-price">от €@entity.Price</div>
+                <div class="tour-card">
+                   @*  <!-- Бейдж скидки -->
+                    <div class="tour-badge">Топ<br>-20%</div> *@
 
-                    <div class="card-footer">
-                        <a asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" class="card-link">
-                            Подробнее →
-                        </a>
+                    <!-- Изображение -->
+                    <div class="tour-image">
+                        <img src="~/img/@entity.PhotoFileName" alt="@entity.Title" />
                     </div>
+
+                    <!-- Заголовок -->
+                    <h3 class="tour-title">@entity.Title</h3>
+
+                    <!-- Характеристики -->
+                    <div class="tour-meta">
+                        <span>⏱ @entity.Time часов</span>
+                        @* <span>🚐 Автобус</span> *@
+                        @* <span>📍 @entity.Distance км</span> *@
+                    </div>
+
+                    <!-- Описание -->
+                    <div class="tour-description">
+                        <p class="tour-short-desc">@entity.DescriptionShort</p>
+                    </div>
+
+                    <!-- Рейтинг -->
+                    <div class="tour-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-value">5.0</span>
+                        @* <span class="reviews">(@entity.Reviews отзывов)</span> *@
+                    </div>
+
+                    <!-- Цены -->
+                    <div class="tour-prices">
+                        <div class="price-row">
+                            <span class="price-label">Взр:</span>
+                            <span class="price-new">от $@entity.Price</span>
+                            
+                            
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Реб:</span>
+                            <span class="price-new">от $@entity.Price</span>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <!-- Кнопка -->
+                    <a asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id" class="tour-btn">
+                        Подробнее →
+                    </a>
                 </div>
-            </div>
+
+                    
+                </div>
+           
         }
     </div>
 
