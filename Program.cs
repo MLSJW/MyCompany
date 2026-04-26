@@ -14,7 +14,7 @@ namespace MyCompany
         public static async Task Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            
+            builder.WebHost.UseUrls("http://0.0.0.0:80");
             //подключение json и дефолтных путей
             IConfigurationBuilder configBuild = new ConfigurationBuilder()
                 .SetBasePath(builder.Environment.ContentRootPath)
