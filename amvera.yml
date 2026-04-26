@@ -5,6 +5,8 @@ meta:
     version: "10.0"
 build:
   image: null
+  buildCommand: dotnet publish -c Release -o /app/publish
+  artifacts: /app/publish/*
 run:
   image: null
   buildFileName: bin/MyCompany 
